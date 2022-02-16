@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import SelectedDots from './selected-dots';
-import queryWordList from '../../utils/queryWordList';
 import styles from './style.module.less';
 
-const WordItem = ({ onFilterWordList }) => {
+const WordItem = ({ onFilterCallback }) => {
   const [word, setWord] = useState('');
-  // exact | blur
+  // exact | non-postion
   const [type, setType] = useState('exact');
   const [position, setPosition] = useState([]);
 
   useEffect(() => {
     if (word.length === 1 && !!type && position.length > 0) {
-      onFilterWordList(queryWordList({ word, type, position }));
+      onFilterCallback({ word, type, position });
     } else {
-      onFilterWordList([]);
+      onFilterCallback(null);
     }
   }, [word, type, position]);
 
@@ -28,7 +27,7 @@ const WordItem = ({ onFilterWordList }) => {
         onChange={e => { setType(e.target.value) }}
       >
         <option value="exact">exact</option>
-        <option value="blur">blur</option>
+        <option value="non-postion">non-postion</option>
       </select>
       <SelectedDots
         value={position}
