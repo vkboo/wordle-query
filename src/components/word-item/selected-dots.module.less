@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    & > .dot {
+        width: 40px;
+        height: 40px;
+        margin: 0 5px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        &.selected.blur {
+            background-color: #ffa700;
+        }
+        &.selected.exact {
+            background-color: #00bcd4;
+        }
+    }
+}
