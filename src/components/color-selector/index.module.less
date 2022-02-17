@@ -1,0 +1,26 @@
+.container {
+    list-style: none;
+    display: flex;
+
+    &>li {
+        width: 56px;
+        height: 56px;
+        border: 3px solid #ccc;
+        cursor: pointer;
+        margin: 2px;
+        &.selected {
+            border: 3px solid #0c51ef;
+        }
+        &.gray {
+            background-color: #93a3b7;
+        }
+
+        &.green {
+            background: #31c466;
+        }
+
+        &.yellow {
+            background-color: #ebb230;
+        }
+    }
+}
