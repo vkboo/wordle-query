@@ -6,17 +6,6 @@ const ModeSelector = ({ value, onChange }) => {
         <ul className={styles.container}>
             <li
                 className={classnames({
-                    [styles.gray]: true,
-                    [styles.selected]: value === 0,
-                })}
-                onClick={() => {
-                    onChange(0);
-                }}
-            >
-
-            </li>
-            <li
-                className={classnames({
                     [styles.green]: true,
                     [styles.selected]: value === 1,
                 })}

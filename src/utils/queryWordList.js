@@ -12,7 +12,8 @@ import { WORDS } from '../constants/wordlist';
 //     nonWord: ['e', 'a', 'r', 'q', 'u', 'c', 'k', 'p', 'w', 'o', 'd']
 // }
 const queryWordList = (conditions) => {
-    // Exact
+    console.log(conditions)
+    // exact
     let newList = WORDS.filter(w => {
         if (conditions.exact.length === 0) return true;
         return conditions.exact.every(({ word, position }) => {
@@ -22,7 +23,7 @@ const queryWordList = (conditions) => {
 
 
     // nonPosition
-    newList = WORDS.filter(w => {
+    newList = newList.filter(w => {
         return conditions.nonPosition.every(({ word, position }) => {
             const wordIndex = w.indexOf(word);
             return wordIndex > -1 && position.every(i => i !== wordIndex);
@@ -35,6 +36,8 @@ const queryWordList = (conditions) => {
             return conditions.nonWord.every(_w => !w.includes(_w));
         });
     }
+
+    return newList;
 }
 
 export default queryWordList;
