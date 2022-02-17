@@ -7,7 +7,7 @@ function App() {
   const [colorType, setColorType] = useState(1);
   return (
     <div className="App">
-      <Grid />
+      <Grid type={colorType} />
       <ColorSelector
         value={colorType}
         onChange={setColorType}

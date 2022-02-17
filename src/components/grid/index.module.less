@@ -1,9 +1,10 @@
 .container {
-    & > .row {
+    &>.row {
         list-style: none;
         display: flex;
         margin: 0 -2px 1px;
-        & > .col {
+
+        &>.col {
             width: 56px;
             height: 56px;
             line-height: 56px;
@@ -13,8 +14,25 @@
             text-align: center;
             font-size: 36px;
             color: #2e2e2e;
+            cursor: pointer;
+
             &.filled {
-             border-color: #2e2e2e;   
+                border-color: #2e2e2e;
+            }
+
+            &.gray {
+                background-color: #93a3b7;
+                color: #fff;
+            }
+
+            &.green {
+                background: #31c466;
+                color: #fff;
+            }
+
+            &.yellow {
+                background-color: #ebb230;
+                color: #fff;
             }
         }
     }

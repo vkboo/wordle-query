@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import classnames from 'classnames';
 import KEY_WORDS from '../../constants/words';
 import styles from './index.module.less';
@@ -83,9 +83,10 @@ const reducer = (state, action) => {
     }
 }
 
-const Grid = () => {
+const Grid = ({ type }) => {
 
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
+    const [selectStates, setSelectStates] = useState(row.map(_ => col.map(_ => -1)))
 
     const onKeyEnter = () => {
 
@@ -113,6 +114,18 @@ const Grid = () => {
         };
     }, []);
 
+    const onClickItem = ({
+        word,
+        rowIndex,
+        colIndex,
+        type,
+    }) => {
+        let newStates = selectStates.map(e => [...e]);
+        const oldValue = newStates[rowIndex][colIndex];
+        newStates[rowIndex][colIndex] = oldValue === -1 ? type : -1;
+        setSelectStates(newStates);
+    };
+
     return (
         <div className={styles.container}>
             {row.map(rowIndex => (
@@ -122,13 +135,27 @@ const Grid = () => {
                 >
                     {col.map(colIndex => {
                         const word = state.wordList[rowIndex][colIndex];
+                        const graySelected = selectStates[rowIndex][colIndex] === 0;
+                        const yellowSelected = selectStates[rowIndex][colIndex] === 0.5;
+                        const greenSelected = selectStates[rowIndex][colIndex] === 1;
                         return (
                             <li
                                 className={classnames({
                                     [styles.col]: true,
                                     [styles.filled]: !!word,
+                                    [styles.gray]: graySelected,
+                                    [styles.yellow]: yellowSelected,
+                                    [styles.green]: greenSelected,
                                 })}
                                 key={colIndex}
+                                onClick={() => {
+                                    onClickItem({
+                                        word,
+                                        rowIndex,
+                                        colIndex,
+                                        type,
+                                    })
+                                }}
                             >
                                 {word.toUpperCase()}
                             </li>
